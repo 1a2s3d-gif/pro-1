@@ -76,8 +76,8 @@ function renderCart(){
   $('#cartCount').textContent=t.items.reduce((s,i)=>s+i.qty,0);
   $('#cartBody').innerHTML=t.items.length?t.items.map(i=>`
   <div class="line"><span class="ic">${i.icon}</span><div class="nm">${i.name}<br><small>${fmt(i.price)}</small></div>
-  <div class="qty"><button class="icon-btn" data-q="${i.id}" data-d="-1" aria-label="إنقاص"><span data-ic="minus"></span></button><b>${i.qty}</b>
-  <button class="icon-btn" data-q="${i.id}" data-d="1" aria-label="زيادة"><span data-ic="plus"></span></button></div></div>`).join(''):'<p class="empty">سلتك فارغة</p>';
+  <div class="qty"><button class="icon-btn" data-q="${i.id}" data-d="-1" aria-label="إنقاص">-<span data-ic="minus"></span></button><b>${i.qty}</b>
+  <button class="icon-btn" data-q="${i.id}" data-d="1" aria-label="زيادة">+<span data-ic="plus"></span></button></div></div>`).join(''):'<p class="empty">سلتك فارغة</p>';
   const f=$('#cartFoot');f.hidden=!t.items.length;
   f.innerHTML=summaryHTML(t)+'<button class="btn btn-lg btn-block" id="goCheckout">إتمام الطلب</button>';
   icons($('#cart'));
