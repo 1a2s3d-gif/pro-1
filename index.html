@@ -1,0 +1,165 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نبض — متجر الصوتيات والتقنية</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+  <header class="site-header">
+    <div class="wrap">
+      <div class="bar">
+        <a class="logo" href="#">نبض</a>
+        <label class="search"><span data-ic="search"></span><input id="searchInput" type="search" placeholder="ابحث عن منتج..."></label>
+        <button class="btn ghost" id="trackBtn" type="button">تتبع طلبي</button>
+        <button class="icon-btn" id="cartBtn" type="button" aria-label="فتح السلة"><span data-ic="cart">🛒</span><span class="badge" id="cartCount">0</span></button>
+      </div>
+      <nav class="cats" id="catNav" aria-label="التصنيفات"></nav>
+    </div>
+  </header>
+  <main>
+    <section class="wrap hero">
+      <h1>صوت أنقى، تقنية أذكى</h1>
+      <p>سماعات ومكبرات وإكسسوارات بأفضل الأسعار مع توصيل سريع داخل الإمارات.</p>
+    </section>
+
+    <section class="perks" aria-label="مزايا المتجر">
+      <div class="wrap perks-grid">
+        <div class="perk"><strong>500 د.إ</strong><span>حد الشحن المجاني</span></div>
+        <div class="perk"><strong>1 – 3 أيام</strong><span>التوصيل داخل الإمارات</span></div>
+        <div class="perk"><strong>سنتان</strong><span>ضمان على كل المنتجات</span></div>
+        <div class="perk"><strong>14 يومًا</strong><span>سياسة الإرجاع</span></div>
+      </div>
+    </section>
+
+    <section class="wrap section" id="products">
+      <div class="toolbar">
+        <div>
+          <h2 id="listTitle">كل المنتجات</h2>
+          <p class="sub" id="resultCount"></p>
+        </div>
+        <div class="toolbar-tools">
+          <label class="check"><input type="checkbox" id="stockOnly"> المتوفر فقط</label>
+          <label class="sr-only" for="sortSel">ترتيب المنتجات</label>
+          <select class="select" id="sortSel">
+            <option value="featured">الترتيب: المميزة</option>
+            <option value="priceAsc">السعر: من الأقل</option>
+            <option value="priceDesc">السعر: من الأعلى</option>
+            <option value="rating">الأعلى تقييمًا</option>
+            <option value="discount">الأكبر خصمًا</option>
+          </select>
+        </div>
+      </div>
+      <div class="grid" id="grid"></div>
+    </section>
+  </main>
+
+  <footer class="site-footer">
+    <div class="wrap">
+      <div class="foot-grid">
+        <div>
+          <h3>نبض</h3>
+          <p>متجر إلكتروني تجريبي للصوتيات والتقنية، بُني كمشروع تخرج في تخصص البرمجة. لا يتم أي خصم مالي حقيقي.</p>
+        </div>
+        <div>
+          <h3>المتجر</h3>
+          <ul>
+            <li><a href="#products">كل المنتجات</a></li>
+            <li><a href="admin.html">لوحة التحكم</a></li>
+          </ul>
+        </div>
+        <div>
+          <h3>المشروع</h3>
+          <ul>
+            <li>إعداد: [اسم الطالب]</li>
+            <li>إشراف: [اسم المشرف]</li>
+            <li>[اسم الجامعة] — [القسم]</li>
+          </ul>
+        </div>
+      </div>
+      <p class="foot-bottom">© 2026 نبض. جميع الأسعار بالدرهم الإماراتي وشاملة ضريبة القيمة المضافة 5%.</p>
+    </div>
+  </footer>
+
+  <!-- سلة المشتريات -->
+  <div class="overlay" id="overlay"></div>
+  <aside class="drawer" id="cart" aria-label="سلة المشتريات" inert>
+    <div class="drawer-head">
+      <h2>سلة المشتريات</h2>
+      <button class="icon-btn" id="cartClose" type="button" aria-label="إغلاق السلة"><span data-ic="close"></span></button>
+    </div>
+    <div class="drawer-body" id="cartBody"></div>
+    <div class="drawer-foot" id="cartFoot" hidden></div>
+  </aside>
+
+  <!-- تفاصيل المنتج -->
+  <dialog id="productDlg" aria-label="تفاصيل المنتج">
+    <div class="dlg-head">
+      <span class="dlg-kicker" id="pdKicker"></span>
+      <button class="icon-btn sm" type="button" data-close aria-label="إغلاق"><span data-ic="close"></span></button>
+    </div>
+    <div id="productBody" style="overflow-y:auto"></div>
+  </dialog>
+
+  <!-- إتمام الطلب -->
+  <dialog id="checkoutDlg" aria-labelledby="coTitle">
+    <div class="dlg-head">
+      <h2 id="coTitle">إتمام الطلب</h2>
+      <button class="icon-btn sm" type="button" data-close aria-label="إغلاق"><span data-ic="close"></span></button>
+    </div>
+    <div class="dlg-body co-grid">
+      <form id="coForm" novalidate>
+        <fieldset>
+          <legend>بيانات التوصيل</legend>
+          <div class="row2">
+            <div class="field"><label for="coName">الاسم الكامل</label><input class="input" id="coName" autocomplete="name"><span class="err"></span></div>
+            <div class="field"><label for="coPhone">رقم الجوال</label><input class="input ltr" id="coPhone" inputmode="tel" autocomplete="tel" placeholder="05X XXX XXXX"><span class="err"></span></div>
+          </div>
+          <div class="row2">
+            <div class="field"><label for="coEmail">البريد الإلكتروني</label><input class="input ltr" id="coEmail" type="email" autocomplete="email" placeholder="name@example.com"><span class="err"></span></div>
+            <div class="field"><label for="coEmirate">الإمارة</label><select class="select" id="coEmirate"><option value="">اختر الإمارة</option></select><span class="err"></span></div>
+          </div>
+          <div class="field"><label for="coAddress">العنوان التفصيلي</label><textarea class="textarea" id="coAddress" rows="2" placeholder="المنطقة، الشارع، رقم المبنى والشقة"></textarea><span class="err"></span></div>
+        </fieldset>
+
+        <fieldset>
+          <legend>طريقة الدفع</legend>
+          <label class="pay-opt"><input type="radio" name="pay" value="card" checked><span>بطاقة ائتمان<small>Visa / Mastercard</small></span></label>
+          <label class="pay-opt"><input type="radio" name="pay" value="cod"><span>الدفع عند الاستلام<small>يُضاف 0 د.إ رسوم</small></span></label>
+          <div id="cardFields" style="display:grid;gap:14px">
+            <div class="field"><label for="cardNum">رقم البطاقة</label><input class="input ltr" id="cardNum" inputmode="numeric" autocomplete="off" placeholder="0000 0000 0000 0000" maxlength="23"><span class="err"></span></div>
+            <div class="row2">
+              <div class="field"><label for="cardExp">تاريخ الانتهاء</label><input class="input ltr" id="cardExp" inputmode="numeric" autocomplete="off" placeholder="MM/YY" maxlength="5"><span class="err"></span></div>
+              <div class="field"><label for="cardCvv">رمز الأمان CVV</label><input class="input ltr" id="cardCvv" inputmode="numeric" autocomplete="off" placeholder="123" maxlength="4"><span class="err"></span></div>
+            </div>
+            <p class="demo-note">متجر تجريبي: لا تُدخل بطاقتك الحقيقية. استخدم البطاقة التجريبية 4242 4242 4242 4242 مع أي تاريخ مستقبلي. لا تُحفظ بيانات البطاقة.</p>
+          </div>
+        </fieldset>
+
+        <p class="form-error" id="coError" role="alert"></p>
+        <button class="btn btn-lg btn-block" type="submit" id="coSubmit">تأكيد الطلب</button>
+      </form>
+      <aside class="co-summary" id="coSummary" aria-label="ملخص الطلب"></aside>
+    </div>
+  </dialog>
+
+  <!-- تأكيد الطلب -->
+  <dialog id="doneDlg" class="narrow" aria-label="تم استلام طلبك">
+    <div class="dlg-body" id="doneBody"></div>
+  </dialog>
+
+  <!-- تتبع الطلب -->
+  <dialog id="trackDlg" class="narrow" aria-label="تتبع الطلب">
+    <div class="dlg-head"><h2>تتبع طلبك</h2><button class="icon-btn sm" type="button" data-close aria-label="إغلاق"><span data-ic="close"></span></button></div>
+    <div class="dlg-body">
+      <div class="field"><label for="trackId">رقم الطلب</label><input class="input ltr" id="trackId" placeholder="NB-123456"></div>
+      <button class="btn btn-block" id="trackGo" type="button">بحث</button>
+      <div id="trackRes" style="margin-top:14px"></div>
+    </div>
+  </dialog>
+
+  <script src="js/db.js"></script>
+  <script src="js/shop.js"></script>
+</body>
+</html>

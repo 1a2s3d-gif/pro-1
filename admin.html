@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html lang="ar" dir="rtl">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<title>نبض — لوحة التحكم</title>
+<link rel="stylesheet" href="css/style.css">
+</head>
+<body>
+<header class="site-header"><div class="wrap bar"><a class="logo" href="index.html">نبض ← المتجر</a><b>لوحة التحكم</b></div></header>
+<main class="wrap" id="app" hidden>
+  <div class="tabs">
+    <button class="chip on" data-tab="dash">التقارير</button>
+    <button class="chip" data-tab="inv">المخزون</button>
+    <button class="chip" data-tab="ord">الطلبات</button>
+  </div>
+  <section id="dash"></section>
+  <section id="inv" hidden></section>
+  <section id="ord" hidden></section>
+</main>
+<script src="js/db.js"></script>
+<script src="js/admin.js"></script>
+</body>
+</html>
